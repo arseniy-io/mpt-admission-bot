@@ -97,7 +97,7 @@ TELEGRAM_PROXY_URL=
 WEBHOOK_PATH=/webhook
 ```
 
-На Render локальный прокси не нужен, поэтому `TELEGRAM_PROXY_URL` должен быть пустым.
+Render сам передает сервису переменную `RENDER_EXTERNAL_HOSTNAME`, по ней бот понимает публичный адрес webhook. На Render локальный прокси не нужен, поэтому `TELEGRAM_PROXY_URL` должен быть пустым.
 
 ## Как редактировать ответы
 

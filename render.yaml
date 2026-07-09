@@ -16,11 +16,6 @@ services:
         value: ""
       - key: BOT_MODE
         value: webhook
-      - key: WEBHOOK_HOSTNAME
-        fromService:
-          type: web
-          name: mpt-admission-bot
-          envVarKey: RENDER_EXTERNAL_HOSTNAME
       - key: WEBHOOK_PATH
         value: /webhook
       - key: WEBHOOK_SECRET
