@@ -70,6 +70,8 @@ python -m bot.main
 
 Проект подготовлен для деплоя через Dockerfile. В Koyeb нужно создать сервис из GitHub-репозитория и указать переменные окружения:
 
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&builder=dockerfile&repository=github.com/arseniy-io/mpt-admission-bot&branch=master&name=mpt-admission-bot&service_type=worker&dockerfile=Dockerfile&env%5BDATA_DIR%5D=data&env%5BTELEGRAM_PROXY_URL%5D=)
+
 ```env
 BOT_TOKEN=ваш_токен_бота
 ADMIN_IDS=
