@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import os
+import re
 
 from dotenv import load_dotenv
 
@@ -35,6 +36,15 @@ def _parse_admin_ids(raw_value: str) -> list[int]:
     return admin_ids
 
 
+def _normalize_webhook_secret(raw_value: str) -> str | None:
+    secret = raw_value.strip()
+    if not secret:
+        return None
+
+    normalized = re.sub(r"[^A-Za-z0-9_-]", "_", secret)
+    return normalized[:256] or None
+
+
 def load_settings() -> Settings:
     load_dotenv()
 
@@ -48,7 +58,7 @@ def load_settings() -> Settings:
     telegram_proxy_url = os.getenv("TELEGRAM_PROXY_URL", "").strip() or None
     bot_mode = os.getenv("BOT_MODE", "polling").strip().lower() or "polling"
     webhook_path = os.getenv("WEBHOOK_PATH", "/webhook").strip() or "/webhook"
-    webhook_secret = os.getenv("WEBHOOK_SECRET", "").strip() or None
+    webhook_secret = _normalize_webhook_secret(os.getenv("WEBHOOK_SECRET", ""))
     web_host = os.getenv("WEB_HOST", "0.0.0.0").strip() or "0.0.0.0"
 
     webhook_base_url = os.getenv("WEBHOOK_BASE_URL", "").strip() or None
