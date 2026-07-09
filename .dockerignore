@@ -1,0 +1,10 @@
+.env
+.venv
+venv
+__pycache__
+*.pyc
+.git
+.gitignore
+bot.log
+bot.err.log
+*.docx

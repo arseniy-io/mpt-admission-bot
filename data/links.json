@@ -1,0 +1,29 @@
+{
+  "links": [
+    {
+      "id": "gosuslugi",
+      "title": "Госуслуги",
+      "url": "https://www.gosuslugi.ru/"
+    },
+    {
+      "id": "college_site",
+      "title": "Сайт колледжа",
+      "url": "https://example.com/"
+    },
+    {
+      "id": "telegram",
+      "title": "Telegram-канал",
+      "url": "https://t.me/example"
+    },
+    {
+      "id": "vk",
+      "title": "VK",
+      "url": "https://vk.com/example"
+    },
+    {
+      "id": "map",
+      "title": "Карта",
+      "url": "https://yandex.ru/maps/?text=Москва,%20улица%20Нежинская,%207"
+    }
+  ]
+}
