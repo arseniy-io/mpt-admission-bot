@@ -10,6 +10,12 @@ class Settings:
     admin_ids: list[int]
     data_dir: str
     telegram_proxy_url: str | None
+    bot_mode: str
+    webhook_base_url: str | None
+    webhook_path: str
+    webhook_secret: str | None
+    web_host: str
+    web_port: int
 
 
 def _parse_admin_ids(raw_value: str) -> list[int]:
@@ -40,10 +46,33 @@ def load_settings() -> Settings:
 
     data_dir = os.getenv("DATA_DIR", "data").strip() or "data"
     telegram_proxy_url = os.getenv("TELEGRAM_PROXY_URL", "").strip() or None
+    bot_mode = os.getenv("BOT_MODE", "polling").strip().lower() or "polling"
+    webhook_path = os.getenv("WEBHOOK_PATH", "/webhook").strip() or "/webhook"
+    webhook_secret = os.getenv("WEBHOOK_SECRET", "").strip() or None
+    web_host = os.getenv("WEB_HOST", "0.0.0.0").strip() or "0.0.0.0"
+
+    webhook_base_url = os.getenv("WEBHOOK_BASE_URL", "").strip() or None
+    webhook_hostname = (
+        os.getenv("WEBHOOK_HOSTNAME", "").strip()
+        or os.getenv("RENDER_EXTERNAL_HOSTNAME", "").strip()
+    )
+    if webhook_base_url is None and webhook_hostname:
+        webhook_base_url = f"https://{webhook_hostname}"
+
+    try:
+        web_port = int(os.getenv("PORT", "8080"))
+    except ValueError as exc:
+        raise ValueError("PORT должен быть числом.") from exc
 
     return Settings(
         bot_token=bot_token,
         admin_ids=_parse_admin_ids(os.getenv("ADMIN_IDS", "")),
         data_dir=data_dir,
         telegram_proxy_url=telegram_proxy_url,
+        bot_mode=bot_mode,
+        webhook_base_url=webhook_base_url,
+        webhook_path=webhook_path,
+        webhook_secret=webhook_secret,
+        web_host=web_host,
+        web_port=web_port,
     )

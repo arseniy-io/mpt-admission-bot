@@ -81,6 +81,24 @@ TELEGRAM_PROXY_URL=
 
 На облачном сервере `TELEGRAM_PROXY_URL` обычно должен быть пустым. Локальный прокси `127.0.0.1:10809` нужен только на текущем компьютере, если Telegram API напрямую не открывается.
 
+## Деплой на Render
+
+Render на бесплатном тарифе лучше использовать через webhook, а не через постоянный polling. В проект добавлен `render.yaml`, поэтому Render сможет создать сервис по настройкам из репозитория.
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/arseniy-io/mpt-admission-bot)
+
+При создании сервиса Render попросит значение `BOT_TOKEN`. Остальные важные переменные уже описаны в `render.yaml`:
+
+```env
+BOT_MODE=webhook
+ADMIN_IDS=6360613956
+DATA_DIR=data
+TELEGRAM_PROXY_URL=
+WEBHOOK_PATH=/webhook
+```
+
+На Render локальный прокси не нужен, поэтому `TELEGRAM_PROXY_URL` должен быть пустым.
+
 ## Как редактировать ответы
 
 Основные тексты лежат не в коде, а в JSON-файлах:
